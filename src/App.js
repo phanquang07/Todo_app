@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+// import { useState, useEffect } from 'react'
+// import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from 'react'
+import './App.css'
+import Home from './components/Home';
+import TaskHome from './components/TaskHome';
+import { Routes, Route, Link } from "react-router-dom";
+import BoardHome from './components/BoardHome';
+// import BoardList from './components/BoardList';
+// import TaskForm from './components/TaskForm'
+// import TaskList from './components/TaskList'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/board/:boardListID' element={TaskHome} />
+      </Routes>
+      {/* <TaskHome /> */}
     </div>
-  );
+  )
 }
+
 
 export default App;
