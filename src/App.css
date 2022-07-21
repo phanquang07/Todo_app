@@ -156,3 +156,7 @@ a {
   border-radius: 10px;
   margin-left: 10px;
 }
+
+.btn-board-action button:hover {
+  color: rgb(0, 26, 255);
+}

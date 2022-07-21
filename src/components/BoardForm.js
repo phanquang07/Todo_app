@@ -22,7 +22,7 @@ function BoardForm({ boardInput, setBoardInput, boardLists, setBoardLists, editB
   const addBoard = (e) => {
     e.preventDefault()
     if (!editBoard) {
-      setBoardLists([...boardLists, { id: uuidv4(), title: boardInput }])
+      setBoardLists([{ id: uuidv4(), title: boardInput }, ...boardLists])
       setBoardInput('')
     } else {
       updateBoard(boardInput, editBoard.id)

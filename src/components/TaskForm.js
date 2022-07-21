@@ -22,7 +22,7 @@ function TaskForm({ taskInput, setTaskInput, taskLists, setTaskLists, editTask, 
   const addTask = (e) => {
     e.preventDefault()
     if (!editTask) {
-      setTaskLists([...taskLists, { id: uuidv4(), title: taskInput, completed: false }])
+      setTaskLists([{ id: uuidv4(), title: taskInput, completed: false }, ...taskLists])
       setTaskInput('')
     } else {
       updateTask(taskInput, editTask.id, editTask.completed)

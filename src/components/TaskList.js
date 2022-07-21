@@ -1,4 +1,5 @@
 import React from 'react'
+import BoardLists from './BoardLists'
 
 function TaskLists({ taskLists, setTaskLists, setEditTask }) {
 
@@ -23,7 +24,7 @@ function TaskLists({ taskLists, setTaskLists, setEditTask }) {
 
   return (
     <ul className='todo-list task-list'>
-      {taskLists.map((task) => (
+      { BoardLists.length > 0 ? taskLists.map((task) => (
         <li key={task.id} className='todo-item task-item'>
           <div className='todo-input-wrap task-input'>
             <input
@@ -44,7 +45,7 @@ function TaskLists({ taskLists, setTaskLists, setEditTask }) {
             </button>
           </div>
         </li>
-      ))}
+      )) : 'No Task...'}
     </ul>
   )
 }
