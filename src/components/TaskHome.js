@@ -1,26 +1,23 @@
-import React from 'react'
+import React, {  useMemo } from 'react'
 import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import NavBar from './NavBar'
 import TaskForm from './TaskForm'
 import TaskLists from './TaskList'
-// import { useParams } from "react-router-dom"
 
-function TaskHome() {
+function TaskHome(boardLists) {
 
-  // Lấy dữ liệu ra từ datastore
-  const initialState = JSON.parse(localStorage.getItem('taskLists')) || []
+  const initialState = useMemo(()=> JSON.parse(localStorage.getItem('taskLists')) || [],[])
   const [taskInput, setTaskInput] = useState('')
   const [taskLists, setTaskLists] = useState(initialState)
   const [editTask, setEditTask] = useState(null)
 
+  const {boardListId} = useParams()
+  const thisTask = taskLists.filter(item=>item.boardListId===boardListId)
+
   useEffect(() => {
     localStorage.setItem('taskLists', JSON.stringify(taskLists))
   }, [taskLists])
-
-  // useEffect(() => fetchData() ,[] )
-
-  // const { boardListId } = useParams()
-  // const thisTask = TaskHome.find(item => prod.id === boardListId)
 
   return (
     <div className='todo-home task-home'>
@@ -34,9 +31,10 @@ function TaskHome() {
             setTaskLists={setTaskLists}
             editTask={editTask}
             setEditTask={setEditTask}
+            boardListId={boardListId}
           />
           <TaskLists
-            taskLists={taskLists}
+            taskLists={boardListId && thisTask}
             setTaskLists={setTaskLists}
             setEditTask={setEditTask}
           />

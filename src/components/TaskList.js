@@ -1,16 +1,17 @@
 import React from 'react'
-import BoardLists from './BoardLists'
 
-function TaskLists({ taskLists, setTaskLists, setEditTask }) {
+function TaskLists({ taskLists, setTaskLists, setEditTask, boardLists, setBoardLists }) {
 
-  const handleDelete = ({ id }) => {
-    setTaskLists(taskLists.filter((task) => task.id !== id))
+  const handleDelete = ({ id, boardListId }) => {
+    // const a = setBoardLists(boardLists.filter(boardListId)) 
+    setTaskLists(taskLists.filter((taskList) => taskList.id !== id ))
+    // console.log(taskLists, id);
   }
 
-  const handleComplete = (task) => {
+  const handleComplete = (taskList) => {
     setTaskLists(
       taskLists.map((item) => {
-        if (item.id === task.id) {
+        if (item.id === taskList.id) {
           return { ...item, completed: !item.completed }
         }
         return item
@@ -19,28 +20,28 @@ function TaskLists({ taskLists, setTaskLists, setEditTask }) {
   }
 
   const handleEdit = ({ id }) => {
-    setEditTask(taskLists.find((task) => task.id === id))
+    setEditTask(taskLists.find((taskList) => taskList.id === id))
   }
 
   return (
     <ul className='todo-list task-list'>
-      { BoardLists.length > 0 ? taskLists.map((task) => (
-        <li key={task.id} className='todo-item task-item'>
+      { taskLists.length > 0 ? taskLists.map((taskList) => (
+        <li key={taskList.id} className='todo-item task-item'>
           <div className='todo-input-wrap task-input'>
             <input
-              className={`list ${task.completed ? 'task-complete' : 'todo-text'}`}
-              value={task.title}
+              className={`list ${taskList.completed ? 'task-complete' : 'todo-text'}`}
+              value={taskList.title}
               onChange={(e) => e.preventDefault()}
             />
           </div>
           <div className='btn-task-action'>
-            <button className='btn-todo-item btn-complete' onClick={() => handleComplete(task)}>
+            <button className='btn-todo-item btn-complete' onClick={() => handleComplete(taskList)}>
               <i className="fa-regular fa-circle-check"></i>
             </button>
-            <button className='btn-todo-item btn-edit' onClick={() => handleEdit(task)}>
+            <button className='btn-todo-item btn-edit' onClick={() => handleEdit(taskList)}>
               <i className="fa-regular fa-edit"></i>
             </button>
-            <button className='btn-todo-item btn-delete' onClick={() => handleDelete(task)}>
+            <button className='btn-todo-item btn-delete' onClick={() => handleDelete(taskList)}>
               <i className="fa-regular fa-trash-can"></i>
             </button>
           </div>
@@ -51,3 +52,5 @@ function TaskLists({ taskLists, setTaskLists, setEditTask }) {
 }
 
 export default TaskLists
+
+// *daily tìm hiểu useMemo, fix

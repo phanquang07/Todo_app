@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
-function TaskForm({ taskInput, setTaskInput, taskLists, setTaskLists, editTask, setEditTask }) {
+function TaskForm({ boardListId, taskInput, setTaskInput, taskLists, setTaskLists, editTask, setEditTask }) {
 
-  const updateTask = (title, id, completed) => {
+  const updateTask = (title, id, completed, boardListId) => {
     const newTask = taskLists.map((task) =>
-      task.id === id ? { title, id, completed } : task
+      task.id === id ? { title, id, completed, boardListId } : task
     )
     setTaskLists(newTask)
     setEditTask('')
@@ -22,10 +22,10 @@ function TaskForm({ taskInput, setTaskInput, taskLists, setTaskLists, editTask, 
   const addTask = (e) => {
     e.preventDefault()
     if (!editTask) {
-      setTaskLists([{ id: uuidv4(), title: taskInput, completed: false }, ...taskLists])
+      setTaskLists([{ id: uuidv4(), title: taskInput, completed: false, boardListId}, ...taskLists])
       setTaskInput('')
     } else {
-      updateTask(taskInput, editTask.id, editTask.completed)
+      updateTask(taskInput, editTask.id, editTask.completed, editTask.boardListId)
     }
   }
 

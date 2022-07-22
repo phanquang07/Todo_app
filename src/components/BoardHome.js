@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { useState } from 'react'
 import BoardForm from './BoardForm'
 import BoardList from './BoardLists'
-import TaskLists from './TaskList'
 
 function BoardHome() {
   // Lấy dữ liệu ra từ datastore
-  const initialState = JSON.parse(localStorage.getItem('boardLists')) || []
+  const initialState = useMemo(() => JSON.parse(localStorage.getItem('boardLists')) || [], [])
   const [boardInput, setBoardInput] = useState('')
   const [boardLists, setBoardLists] = useState(initialState)
   const [editBoard, setEditBoard] = useState(null)
