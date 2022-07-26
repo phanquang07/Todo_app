@@ -4,11 +4,10 @@ import BoardForm from './BoardForm'
 import BoardList from './BoardLists'
 
 function BoardHome() {
-  // Lấy dữ liệu ra từ datastore
   const initialState = useMemo(() => JSON.parse(localStorage.getItem('boardLists')) || [], [])
   const [boardInput, setBoardInput] = useState('')
   const [boardLists, setBoardLists] = useState(initialState)
-  const [editBoard, setEditBoard] = useState(null)
+  const [editBoard, setEditBoard] = useState('')
 
   useEffect(() => {
     localStorage.setItem('boardLists', JSON.stringify(boardLists))
